@@ -20,11 +20,11 @@
   - 类型系统
   - 数组
   - 字符串
-  - 作用域
+  - [作用域](https://github.com/nightn/front-end-plan/blob/master/js/js-scope.md)
   - 闭包
   - 原型
   - DOM
-  - 事件
+  - [事件](https://github.com/nightn/front-end-plan/blob/master/js/js-event.md)
   - Ajax
   - 最佳实践
 - CSS

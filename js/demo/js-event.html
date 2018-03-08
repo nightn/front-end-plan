@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS事件demo</title>
+    <style>
+        #div {
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <h2>事件流演示</h2>
+    <div id="div">
+        <button id="btn">btn</button>
+    </div>
+
+    <script>
+        var div = document.getElementById('div');
+        var btn = document.getElementById('btn');
+        window.addEventListener('click', function() {
+            alert('window clicked');
+        });
+        document.addEventListener('click', function() {
+            alert('document clicked');
+        });
+        document.body.addEventListener('click', function() {
+            alert('body clicked');
+        });
+        div.addEventListener('click', function() {
+            alert('div clicked');
+        });
+        btn.addEventListener('click', function() {
+            alert('btn clicked');
+        }, false);
+
+    </script>
+</body>
+</html>
