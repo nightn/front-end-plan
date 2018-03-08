@@ -21,6 +21,7 @@
   - 数组
   - 字符串
   - [作用域](https://github.com/nightn/front-end-plan/blob/master/js/js-scope.md)
+  - this
   - 闭包
   - 原型
   - DOM
