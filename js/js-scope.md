@@ -135,8 +135,8 @@ globalExecutionContextObj = {
 cFuncExecutionContextObj = {
     activationObj: {
         argumentObj: {
-            0: e,
-        	length: 1
+			0: e,
+			length: 1
         }
         e: 10,
         c: undefined,
@@ -278,7 +278,7 @@ bar = function() {
 
 with 语句看起来很方便，但运行得很慢，所以在严格模式中，是禁止使用 with 语句的，并且在非严格模式中也是不推荐使用的。with 的作用是：**在 with 开始的地方，将给定对象添加到作用域链的头部，在 with 中的语句执行完毕后，再把作用域链恢复到原始状态**。考虑如下代码：
 
-```java
+```javascript
 // with 语句
 var nightn = {
     name: 'nightn',
