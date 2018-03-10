@@ -28,7 +28,7 @@
   - [事件](https://github.com/nightn/front-end-plan/blob/master/js/js-event.md)
   - Ajax
   - 最佳实践
-  - [知识片段]((https://github.com/nightn/front-end-plan/blob/master/js/js-point.md))
+  - [知识片段](https://github.com/nightn/front-end-plan/blob/master/js/js-point.md)
 
 - CSS
   - 选择器
