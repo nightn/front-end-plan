@@ -19,7 +19,7 @@
 - JavaScript
   - 类型系统
   - 数组
-  - 字符串
+  - [字符串](https://github.com/nightn/front-end-plan/blob/master/js/js-string.md)
   - [作用域](https://github.com/nightn/front-end-plan/blob/master/js/js-scope.md)
   - this
   - 闭包
@@ -28,12 +28,32 @@
   - [事件](https://github.com/nightn/front-end-plan/blob/master/js/js-event.md)
   - Ajax
   - 最佳实践
+  - [知识片段]((https://github.com/nightn/front-end-plan/blob/master/js/js-point.md))
+
 - CSS
   - 选择器
   - 盒模型
   - 布局
+
 - HTML
+
 - ES6
+  - promise
+
 - CSS3
+
 - HTML5
+
 - Angular
+
+- 速查表
+
+  - [web dev roadmap](.\cheat-sheets\web-dev-roadmap-2018.pdf)
+
+  - [git](.\cheat-sheets\github-git-cheat-sheet.pdf)
+
+  - [big-o-cheat-sheet](.\cheat-sheets\big-o-cheat-sheet.pdf)
+
+  - [bits-cheat-sheet](.\cheat-sheets\bits-cheat-sheet.pdf)
+
+    ​
