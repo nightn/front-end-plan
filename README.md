@@ -18,7 +18,7 @@
 
 - JavaScript
   - 类型系统
-  - 数组
+  - [数组](js/js-array.md)
   - [字符串](js/js-string.md)
   - [作用域](js/js-scope.md)
   - this
