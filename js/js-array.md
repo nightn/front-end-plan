@@ -128,7 +128,7 @@ console.log(arr instanceof Array); // true
 
 构造函数的实质也是对象，在对象上定义的属性相当于这个构造函数的静态成员。`isArray` 就是 `Array` 的一个静态方法，它用于确定某个值到底是不是数组，而不管它是在哪个全局执行环境中创建的。
 
-> 像大多数的内置构造函数的静态成员一样，我们无法用 for in 看到它们。这说明这些属性的 [[Enumerable]] 特性被设置为了 false。不过我测试了一下 isArray，发现它的 [[Configurable]] 特性是 true（因为我可以用 delete 删除它），[[Writable]] 特性也是 true（因为我可以重写它）。更多关于属性特性的知识可以参考我的另一篇文章：[JS 对象](js/js-object.md) 。
+> 像大多数的内置构造函数的静态成员一样，我们无法用 for in 看到它们。这说明这些属性的 [[Enumerable]] 特性被设置为了 false。不过我测试了一下 isArray，发现它的 [[Configurable]] 特性是 true（因为我可以用 delete 删除它），[[Writable]] 特性也是 true（因为我可以重写它）。更多关于属性特性的知识可以参考我的另一篇文章：[JS 对象](https://github.com/nightn/front-end-plan/blob/master/js/js-object.md) 。
 
 我还是礼貌性地举一个 `Array.isArray` 的例子吧：
 
@@ -209,7 +209,7 @@ console.log(arr.join('||')); // nightn||nightn
 
 ```javascript
 var arr = [5, 6];
-arr.push(7); // 添加元素 3，并返回当前的数组大小：3
+arr.push(7); // 添加元素 7，并返回当前的数组大小：3
 arr.push(8, [9, 10]); // 此时返回多少呢？5 or 6？答案是 5，注意 push 和 concat 的区别。
 ```
 
@@ -280,7 +280,7 @@ console.log(skills2017.toString()); // JavaScript,Java,C++,Python,Angular,ES6,Ty
 
 ### slice
 
-数组的 `slice` 方法和字符串的分割方法 `slice` 很相似（具体可以参考[JS 字符串](js/js-string.md)）。它接收两个参数，第一个是切割起始索引，第二个是切割结束索引，切割区间是左闭右开。另外，和字符串的 `slice` 一样，数组的 `slice` 对负数参数和逆区间的处理都很合理。
+数组的 `slice` 方法和字符串的分割方法 `slice` 很相似（具体可以参考[JS 字符串](https://github.com/nightn/front-end-plan/blob/master/js/js-string.md)）。它接收两个参数，第一个是切割起始索引，第二个是切割结束索引，切割区间是左闭右开。另外，和字符串的 `slice` 一样，数组的 `slice` 对负数参数和逆区间的处理都很合理。
 
 - 如果参数有负数，就将其加上数组的长度（如果加上数组的长度后还是为负数，貌似会将其当做 0 处理）
 - 如果有逆区间（即 2 个参数都为正的情况下，参数 1 大于参数 2），则返回空数组
