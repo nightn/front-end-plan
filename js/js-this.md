@@ -2,23 +2,23 @@
 
 ## 目录
 
-- [this 概述](#this 概述)
-  - [什么是 this](#什么是 this)
-  - [为什么要有 this](#为什么要有 this)
-- [this 绑定](#this 绑定)
+- [this概述](#this概述)
+  - [什么是this](#什么是this)
+  - [为什么要有this](#为什么要有this)
+- [this绑定](#this绑定)
   - [默认绑定](#默认绑定)
   - [隐式绑定](#隐式绑定)
   - [显示绑定](#显示绑定)
-  - [new 绑定](#new 绑定)
+  - [new绑定](#new绑定)
   - [绑定优先级](#绑定优先级)
-- [this 判断](#this 判断)
+- [this判断](#this判断)
 - [参考资料](#参考资料)
 
 ---
 
-## this 概述
+## this概述
 
-### 什么是 this
+### 什么是this
 
 **this** 是 JavaScript 中的一个关键字，它是函数在调用时在函数内部才能访问到的一个对象，是函数执行环境的一部分。**非常重要的一点：this 的值是在函数被调用的时候确定的，概括性地讲，this 总是指向函数的调用主体**。
 
@@ -30,7 +30,7 @@
 
 > 建议大家先阅读 [JS 作用域](https://github.com/nightn/front-end-plan/blob/master/js/js-scope.md) ，了解函数的执行环境和执行过程。
 
-### 为什么要有 this
+### 为什么要有this
 
 我阅读了很多关于 this 的文章，它们大部分是讨论什么是 this，以及如何确定 this 的指向，但却**很少有人研究函数执行的时候为什么要有 this 对象**。
 
@@ -54,7 +54,7 @@ JavaScript 与此类似，只是由于 JavaScript 的动态特性，它的 this 
 
 ---
 
-## this 绑定
+## this绑定
 
 JavaScript 中 this 的确定看似复杂，实则遵循了明确的 this 绑定规则，以下简述了 4 种 this 绑定规则及其优先级。理解了这些绑定规则，this 的确定便是轻而易举的事情了。
 
@@ -120,7 +120,7 @@ var foo = bar.bind(obj1);
 foo(); // 20
 ```
 
-### new 绑定
+### new绑定
 
 `new 绑定` 是指用 new 调用函数时发生的绑定，此时 this 绑定到新创建的对象。
 
@@ -143,7 +143,7 @@ console.log(a); // 10  全局 a 没有被修改
 
 ---
 
-## this 判断
+## this判断
 
 this 判断的 4 个步骤：
 
