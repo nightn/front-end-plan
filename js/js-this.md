@@ -69,7 +69,7 @@ function foo() {
     function bar() {
         console.log(this.a);
     }
-	bar();
+    bar();
 }
 foo(); // 10
 ```
