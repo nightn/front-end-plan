@@ -32,6 +32,7 @@
   - [知识片段](js/js-point.md)
   - Quiz
     - [Quiz1](js/js-quiz1.md)
+    - [Quiz2](js/js-quiz2.md)
 
 - CSS
   - 选择器
