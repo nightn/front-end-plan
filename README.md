@@ -17,7 +17,7 @@
 ## 目录
 
 - JavaScript
-  - 类型系统
+  - [类型系统](js/js-type.md)
   - [对象](js/js-object.md)
   - [数组](js/js-array.md)
   - [字符串](js/js-string.md)
