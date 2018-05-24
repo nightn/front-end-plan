@@ -6,7 +6,7 @@
 - [原始类型](#原始类型)
   - [number](#number)
   - [string](#string)
-  - [bool](#bool)
+  - [boolean](#boolean)
   - [null](null)
   - [undefined](#undefined)
   - [symbol](#symbol)
