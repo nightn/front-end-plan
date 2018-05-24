@@ -18,9 +18,11 @@
 
 - JavaScript
   - [类型系统](js/js-type.md)
+  - [类型转换](js/js-type-conversion.md)
   - [对象](js/js-object.md)
   - [数组](js/js-array.md)
   - [字符串](js/js-string.md)
+  - 函数
   - [作用域](js/js-scope.md)
   - [this](js/js-this.md)
   - 闭包
