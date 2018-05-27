@@ -23,7 +23,7 @@
 // Object.isSealed(obj): obj 是否被密封
 // Object.isFrozen(obj): obj 是否被冻结
 // Object.getPrototypeOf(obj): 获取 obj 的原型对象，相当于 obj.__proto__
-// Object.setPrototypeOf(obj, proto): 将 obj 的原型设置为 proto
+// Object.setPrototypeOf(obj, proto): 将 obj 的原型设置为 proto  [ES6 新增]
 // ...
 // 除了上述方法外，ES6 还引入了 Object.is() 和 Object.assign()
 
