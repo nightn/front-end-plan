@@ -3,8 +3,8 @@
 
 
 // ES5 并没有明确规定对象自有属性的枚举顺序
-// ES6 严格规定了该顺序，这影响到 Object.getOwnPropertyNames(),
-//   Reflect.ownKeys(), Object.assign() 等方法。
+// ES6 严格规定了该顺序，这会影响 Object.getOwnPropertyNames(),
+//   Reflect.ownKeys(), Object.assign() 等方法的行为。
 // 【重要】规定如下：
 //    (1) 所有 numeric keys 按升序排列
 //    (2) 所有 string keys 按添加的先后顺序排列
