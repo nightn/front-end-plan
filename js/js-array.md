@@ -118,7 +118,7 @@ var arr = [];
 console.log(arr instanceof Array); // true
 ```
 
-`instanceof` 检测数组依赖于 Array 构造函数的唯一性。肯定有人会问，难道 JS 中还有多个 Array 构造函数吗？还真有！当一个页面包含多个框架，就会存在多个全局执行环境，不同的全局执行环境存在不同的 Array 构造函数。将一个框架的数组实例和另一个框架的 Array 构造函数，用 `instanceof` 来判断，你将会得到 false。
+`instanceof` 检测数组依赖于 Array 构造函数的唯一性。肯定有人会问，难道 JS 中还有多个 Array 构造函数吗？还真有！当一个页面包含多个框架，就会存在多个全局执行环境，不同的全局执行环境存在相互独立的 Array 构造函数。将一个框架的数组实例和另一个框架的 Array 构造函数，用 `instanceof` 来判断，你将会得到 false。
 
 因此，使用 `instanceof` 检测数组，并不一定都是准确的。
 
@@ -130,7 +130,7 @@ console.log(arr instanceof Array); // true
 
 > 像大多数的内置构造函数的静态成员一样，我们无法用 for in 看到它们。这说明这些属性的 [[Enumerable]] 特性被设置为了 false。不过我测试了一下 isArray，发现它的 [[Configurable]] 特性是 true（因为我可以用 delete 删除它），[[Writable]] 特性也是 true（因为我可以重写它）。更多关于属性特性的知识可以参考我的另一篇文章：[JS 对象](https://github.com/nightn/front-end-plan/blob/master/js/js-object.md) 。
 
-我还是礼貌性地举一个 `Array.isArray` 的例子吧：
+ `Array.isArray` 的用法如下：
 
 ```javascript
 if (Array.isArray(value)) {
@@ -152,7 +152,7 @@ if (Array.isArray(value)) {
 
 ### valueOf
 
-数组的 `valueOf` 返回的还是数组本身。
+数组的 `valueOf` **返回数组本身**。
 
 ```javascript
 var arr = [1, 2, 3];
@@ -161,7 +161,7 @@ console.log(arr === arr.valueOf()); // true
 
 ### toString
 
-数组的 `toString` 方法将调用数组每一项的 `toString` 方法，然后用逗号将每一项连接起来。
+数组的 `toString` 方法将调用数组中每个元素的 `toString` 方法，然后用逗号将每个元素连接成字符串并返回。
 
 ### toLocaleString
 
@@ -183,23 +183,29 @@ var nightn = {
     }
 };
 var arr = [nightn, nightn];
+// (1) toString + 默认分隔符
 console.log(arr.toString()); // nightn,nightn
+// (2) toLocaleString + 默认分隔符
 console.log(arr.toLocaleString()); // nightn.dev@gmail.com,nightn.dev@gmail.com
+// (3) toString + 自定义分隔符
 console.log(arr.join('||')); // nightn||nightn
+// (4) toLocaleString + 自定义分隔符
+// 以下语句打印：nightn.dev@gmail.com||nightn.dev@gmail.com
+console.log(arr.map(item => item.toLocaleString()).join('||')); // 注：数组的 map 方法后面会讲到
 ```
 
 ---
 
 ## 数组端操作
 
-`数组端操作` 是我自己给的定义，指的是专门对数组两端元素进行操作的方法。包括 ：
+`数组端操作` 是我自己给的定义（为了给数组繁多的方法分类，方便记忆），指的是专门对数组两端元素进行操作的方法。包括 ：
 
 - `push` ： 在数组末端添加元素
 - `pop` ：删除数组末尾元素
 - `shift` ：删除数组前端元素
 - `unshift` ：在数组前端添加元素
 
-有一个值得注意的地方：**这 4 个方法都会改变数组本身**。
+有一个值得注意的地方：**这 4 个方法都会改变数组本身**。关于这几个方法的返回值，**添加操作返回新数组的大小，弹出操作返回弹出的那个元素**。
 
 通过使用 `push` 和 `pop` ，可以模仿一个栈。通过使用 `push` 和 `shift` （或者使用 `unshift` 和 `pop`） ，可以模仿一个队列。以下具体讨论这四个方法。
 
@@ -252,7 +258,7 @@ console.log(skills.toString()); // C#,Python,Lisp,JavaScript,Java,C++
 
 ### concat
 
-`concat` 用于拼接数组，即在当前数组的末尾添加新的元素或数组，返回拼接好的数组。
+`concat` 用于拼接数组，即在当前数组的末尾添加新的元素或数组，**返回拼接好的数组（注意：它并不会修改原数组）**。
 
 ```javascript
 var skills = ['JavaScript', 'Java', 'C++'];
@@ -280,7 +286,7 @@ console.log(skills2017.toString()); // JavaScript,Java,C++,Python,Angular,ES6,Ty
 
 ### slice
 
-数组的 `slice` 方法和字符串的分割方法 `slice` 很相似（具体可以参考[JS 字符串](https://github.com/nightn/front-end-plan/blob/master/js/js-string.md)）。它接收两个参数，第一个是切割起始索引，第二个是切割结束索引，切割区间是左闭右开。另外，和字符串的 `slice` 一样，数组的 `slice` 对负数参数和逆区间的处理都很合理。
+数组的 `slice` 方法和字符串的分割方法 `slice` 很相似（具体可以参考[JS 字符串](https://github.com/nightn/front-end-plan/blob/master/js/js-string.md)）。它接收两个参数，第一个是切割起始索引，第二个是切割结束索引，**切割区间是左闭右开**。另外，和字符串的 `slice` 一样，数组的 `slice` 对负数参数和逆区间的处理都很合理。
 
 - 如果参数有负数，就将其加上数组的长度（如果加上数组的长度后还是为负数，貌似会将其当做 0 处理）
 - 如果有逆区间（即 2 个参数都为正的情况下，参数 1 大于参数 2），则返回空数组
@@ -299,7 +305,7 @@ console.log(arr.toString()); // 1,2,3,4,5  可见原始数组并未被修改
 
 ### splice
 
-`splice` 可以说是数组最强大的方法了，之前我们在 [数组端操作](#数组端操作) 中提到的 `push` , `pop` , `shift` 和 `unshift` 方法都是对数组两端进行增加或删除元素。而 `splice` 仅凭一己之力，就能实现在数组任何位置进行删除和增加元素。
+`splice` 可以说是数组最强大的方法了，之前我们在 [数组端操作](#数组端操作) 中提到的 `push` , `pop` , `shift` 和 `unshift` 方法都是对数组两端进行增加或删除元素。而 `splice` 仅凭一己之力，就能实现在数组任何位置进行删除和增加元素。合理使用 `splice` 会使你的代码看起来非常简洁。
 
 `splice` 接收 3 个参数：要修改的位置索引、要删除的元素的个数、要增加的元素。**值得注意的是，`splice` 会对原始数组进行修改，它的返回值是删除的数组。**
 
@@ -330,6 +336,8 @@ console.log(arr.toString()); // orange,red,white,yellow
 
 **从数组末尾往前查找给定元素**，找到了则返回对应索引，没找到则返回 -1。也可以接收第 2 个参数，表示从哪个索引开始查找，可以缩小查找范围。
 
+> 需要注意的是，`indexOf` 和 `lastIndexOf` 接收的索引参数以及返回的索引，都是从左往右的计数索引。
+
 ```javascript
 var arr = [6, 4, 3, 5, 4, 8];
 console.log(arr.indexOf(4)); // 1
@@ -346,7 +354,7 @@ console.log(arr.lastIndexOf(4, 3)); // 1
 
 ### sort
 
-`sort` 方法默认会调用每个元素的 `toString` 方法，再进行比较排序。
+`sort` 方法默认会调用每个元素的 `toString` 方法**（重要）**，再进行比较排序。
 
 ```javascript
 var arr = [4, 23, 1, 12, 8];
@@ -387,7 +395,7 @@ console.log(arr.toString()); // 8,12,1,23,4
 
 ## 数组迭代
 
-数组迭代的方法非常多，包括 `forEach` , `map` , `filter` , `every` , `some` 等。它们的相同点是接收两个参数：要在数组每一项上运行的函数和（可选的）运行该函数的作用域对象——影响 this 的值。传入的函数接收 3 个参数：当前元素的值、当前元素的索引、数组本身。
+数组迭代的方法非常多，包括 `forEach` , `map` , `filter` , `every` , `some` 等。它们的相同点是接收两个参数：要在数组每一项上执行的函数和（可选的）执行该函数的作用域对象——影响 this 的值。传入的函数接收 3 个参数：当前元素的值、当前元素的索引、数组本身。
 
 ### forEach
 
@@ -396,7 +404,7 @@ console.log(arr.toString()); // 8,12,1,23,4
 ```javascript
 var arr = [1, 2, 3, 4];
 arr.forEach(function(item, index, array) {
-	console.log(item);
+    console.log(item);
     // other code
 });
 ```
@@ -415,7 +423,7 @@ console.log(newArr.toString()); // 2,4,6,8
 
 ### filter
 
-`filter` 是过滤的意思，此时传入的函数可以看做是一个条件，**遍历每一项，找到满足该条件的项，返回值便是这些满足条件的元素组成的数组**。
+`filter` 是过滤的意思，此时传入的函数可以看做是一个过滤器，**遍历每一项，找到满足条件的项，返回值便是这些满足条件的元素组成的数组**。
 
 ```javascript
 var arr = [1, 2, 3, 4];
@@ -428,6 +436,8 @@ console.log(newArr.toString()); // 3,4
 ### every
 
 `every` 对数组的每一项进行判断，如果都是满足条件，返回 true，有任意一项不满足条件，则返回 false。
+
+> `every` : 所有元素都满足，才为真。 
 
 ```javascript
 var arr = [1, 2, 3, 4];
@@ -444,6 +454,8 @@ console.log(result2); // false
 ### some
 
 `some` 和 `every` 相反，遍历数组每一项，只要有任何一个元素满足条件，则返回 true，否则返回 false。
+
+> `some` : 只要存在一个元素满足，就为真。
 
 ```javascript
 var arr = [1, 2, 3, 4];
@@ -480,7 +492,7 @@ arr.reduce(function(lastResult, item, index, array) {
 // 以上代码分别打印了 2， 3， 4。没有打印第 1 项
 ```
 
-注意传入函数接收的第一个参数，它不是数组的上一个元素，而是上一次迭代时，函数的返回值。（所以我将其命名为 `lastResult` ，而不是 `lastItem`）。不过，由于第一次迭代的时候，还不存在上一次的函数执行结果，所以第一次迭代时，该参数就是数组的第一个元素（即第一次迭代时，`lastResult` 就等于 `lastItem`）。
+**注意传入函数接收的第一个参数，它不是数组的上一个元素，而是上一次迭代时，函数的返回值**。（所以我将其命名为 `lastResult` ，而不是 `lastItem`）。不过，由于第一次迭代的时候，还不存在上一次的函数执行结果，所以第一次迭代时，该参数就是数组的第一个元素**（即第一次迭代时，`lastResult` 就等于 `lastItem`）**。
 
 ```javascript
 var arr = [1, 2, 3, 4];
@@ -491,7 +503,7 @@ arr.reduce(function(lastResult, item, index, array) {
 // 以上代码打印： 1 hello hello
 ```
 
-这个方法有什么意义呢？其实我也不是很清楚，毕竟我目前很少用到这个方法。在此举一个《JavaScript高级程序设计》的例子吧。
+这个方法有什么意义呢？其实我也不是很清楚，毕竟我目前很少用到这个方法。在此举一个《JavaScript高级程序设计》的例子：**对数组元素快速求和**。
 
 ```javascript
 var values = [1, 2, 3, 4, 5];

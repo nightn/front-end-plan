@@ -166,7 +166,7 @@ symbol 是 ES6 的新特性，用于创建一个独一无二的标识符。关�
 
 ECMA-262 对于对象的定义是：
 
-> 对象是无需属性的集合，其属性可以包含原始值、对象或者函数。
+> 对象是无序属性的集合，其属性可以包含原始值、对象或者函数。
 
 详见 [JS对象](https://github.com/nightn/front-end-plan/blob/master/js/js-object.md) 一文。对象类型包括 [Array](https://github.com/nightn/front-end-plan/blob/master/js/js-array.md) , [String](https://github.com/nightn/front-end-plan/blob/master/js/js-string.md) , Function, RegExp, Date 等，每一种类型都涉及大量知识点，需要单独进行讨论。
 
@@ -179,7 +179,7 @@ ECMA-262 对于对象的定义是：
 ```javascript
 'hello'.slice(1);  // 'ello'
 'hello'.length;  // 5
-1.234.toFixed(2);  // '1.234'
+1.234.toFixed(2);  // '1.23'
 ```
 
 以上代码咋看之下很奇怪，`'hello'` 和 `1.234` 都属于原始类型，原始类型怎么会像对象类型一样，具有属性和方法呢？**其实，只要我们引用原始类型的属性和方法，JavaScript 引擎会自动为我们创建一个临时对象（即包装器对象），然后访问属性也好，调用方法也好，都发生在这个临时对象上，当访问结束后，JavaScript 引擎又自动销毁这个临时变量**。
@@ -192,7 +192,7 @@ str.size = 5;  // 看起来好像我们给 str 添加了一个 size 属性
 console.log(str.size);  // undefined
 ```
 
-第二条语句看起来好像是给 `str` 添加了一个 `size` 属性，但其实只是将这个属性添加到了一个 `String` 类型的临时对象上，该语句执行完后，临时变量也被销毁了。
+第二条语句看起来好像是给 `str` 添加了一个 `size` 属性，但其实只是将这个属性添加到了一个 `String` 类型的临时对象上。该语句执行完后，临时变量也被销毁了，第三条语句中，当我们再次访问 `str.size` 时，此时由于试图访问原始类型的属性，于是又创建了一个新的 `String` 类型的临时变量，而这个临时变量和之前那个临时变量没有任何关系，它并没有 `size` 属性，所以返回 `undefined`。
 
 ---
 

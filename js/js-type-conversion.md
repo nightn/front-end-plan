@@ -25,7 +25,7 @@ JavaScript 中的类型转换非常重要。假如我们要在代码中进行显
 
 ### 转字符串
 
-主要考虑 `undefined` , `null` , `number` 和 `boolean` 这 4 中原始值转字符串的情况。将其他类型显示转为字符串有两种方式：
+主要考虑 `undefined` , `null` , `number` 和 `boolean` 这 4 种原始值转字符串的情况。将其他类型显示转为字符串有两种方式：
 
 - String(val)
 - val + ''
@@ -98,7 +98,7 @@ Boolean(new Boolean(false)); // true
 
 对象转原始值只要考虑**转字符串**和**转数字**的情况，不需要考虑转布尔的情况（因为所有的对象转布尔都得 true）。
 
-ES 规范中关于如何将对象转为原始值，专门有一个 **ToPrimitive  算法 ** （重要） 。该算法需要一个参数 `hint` ，它表示上下文期望的转为类型，**有 3 个可选值：'string', 'number' 和 'default'。** 具体如下：
+ES 规范中关于如何将对象转为原始值，专门有一个 **ToPrimitive算法** （重要） 。该算法需要一个参数 `hint` ，它表示上下文期望转成的类型，**有 3 个可选值：'string', 'number' 和 'default'。** 具体如下：
 
 ```javascript
 // hint is 'string' (for alert and other string conversions)
@@ -185,7 +185,7 @@ console.log(nightn + 200);
   - **转字符串**：基本是在值两端加上引号，-0 除外（**-0 转字符串得 '0'**）；
   - **转数字**：能转的转为数字，不能转的得 NaN（**null --> 0, undefined --> NaN**）；
   - **转布尔**：真值转为 true，假值转为 false（假值包括 `null` , `undefined` , `NaN` , `''` , `0` , `-0` ，其余都是真值）。
-- **对象转原始值，首先要根据转换上下文确定 hint**。hint 的取值包括：`'string'` , `'number'` 和 `'number'` 。分别对应以下 3 种情况：
+- **对象转原始值，首先要根据转换上下文确定 hint**。hint 的取值包括：`'string'` , `'number'` 和 `'default'` 。分别对应以下 3 种情况：
   - `'string'` ：alert 及其他字符串转换的上下文；
   - `'number'` ：数学运算符上下文，如一元`+` ，减号，除号等；
   - `'default'` ：一般运算符，如二元 `+` ，比较运算符 `==` 等。

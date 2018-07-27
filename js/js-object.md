@@ -54,17 +54,17 @@ ECMAScript 中有两种属性：**数据属性**和**访问器属性**。
 
 数据属性包含了一个数据值的位置。通过这个位置可以读取和写入数据。数据属性有 4 个描述其行为的特性。
 
-- **[[Configurable]]** ：表示属性**是否可配置**。可配置具体包括：**是否可以通过 delete 删除属性**、**是否可以将该数据属性转换为访问器属性**、**是否能修改属性的特性 ** 。对于常规定义的属性，它们的 [[Configurable]] 特性的值默认是 **true**，但对于用 `Object.defineProperty` 方法（后面会讲到）定义的属性，[[Configurable]] 特性的值默认是 **false**。
+- **[[Configurable]]** ：表示属性**是否可配置**。可配置具体包括：**是否可以通过 delete 删除属性**、**是否可以将该数据属性转换为访问器属性**、**是否能修改属性的特性** 。对于常规定义的属性，它们的 [[Configurable]] 特性的默认值是 **true**，但对于用 `Object.defineProperty` 方法（后面会讲到）定义的属性，[[Configurable]] 特性的默认值是 **false**。
 
   > 是否能修改属性的特性，这个说法不准确。准确的说法是：是否可以修改属性的 [[Configurable]] 和 [[Enumerable]] 特性。[[Writable]] 和 [[Value]] 特性是否可以修改，与 [[Configurable]] 的值无关。
 
-- **[[Enumerable]]** ：表示属性**是否可枚举**。即**是否能够通过 for in 枚举出来**。对于常规定义的属性，它们的 [[Enumerable]] 特性的值默认是 **true**，但对于用 `Object.defineProperty` 方法定义的属性，[[Enumerable]] 特性的值默认是 **false**。
+- **[[Enumerable]]** ：表示属性**是否可枚举**。即**是否能够通过 for in 枚举出来**。对于常规定义的属性，它们的 [[Enumerable]] 特性的默认值是 **true**，但对于用 `Object.defineProperty` 方法定义的属性，[[Enumerable]] 特性的默认值是 **false**。
 
-- **[[Writable]]** ：表示属性**是否可修改**。对于常规定义的属性，它们的 [[Writable]] 特性的值默认是 **true**，但对于用 `Object.defineProperty` 方法定义的属性，[[Writable]] 特性的值默认是 **false**。
+- **[[Writable]]** ：表示属性**是否可修改**。对于常规定义的属性，它们的 [[Writable]] 特性的默认值是 **true**，但对于用 `Object.defineProperty` 方法定义的属性，[[Writable]] 特性的默认值是 **false**。
 
 - **[[Value]]** ：**包含这个属性的数据值**。属性值的读取和写入都是通过这个特性完成的。默认值为 **undefined** 。
 
-我们可以通过 `Object.defineProperty()` 方法进行属性的高级定义。它接收 3 个参数：目标属性所在的对象、目标属性、属性描述对象。参数具体解释我不多少了，直接看例子：
+我们可以通过 `Object.defineProperty()` 方法进行属性的高级定义。它接收 3 个参数：目标属性所在的对象、目标属性、属性描述对象。参数具体解释无需赘言，直接看例子：
 
 ```javascript
 var person = new Object();
@@ -89,7 +89,7 @@ delete person.name;
 console.log(person.name); // undefined 说明 [[Configurable]] 为 true
 ```
 
-再举一个例子。我们知道，检测数据可以使用 `Array.isArray()` 方法（如果你想深入了解数据，可以看看 [JS 数组](https://github.com/nightn/front-end-plan/blob/master/js/js-array.md)）。我们之所以可以访问构造函数 Array 的 isArray 方法，就是因为构造函数实际上也是对象，isArray 只是这个对象的一个属性。那么我们使用 for in 去遍历 Array 属性的时候，会发现什么都看不到。
+再举一个例子。我们知道，检测数组可以使用 `Array.isArray()` 方法（如果你想深入了解数组，可以看看 [JS 数组](https://github.com/nightn/front-end-plan/blob/master/js/js-array.md)）。我们之所以可以访问构造函数 Array 的 isArray 方法，就是因为构造函数实际上也是对象，isArray 只是这个对象的一个属性。那么我们使用 for in 去遍历 Array 属性的时候，会发现什么都看不到。
 
 ```javascript
 console.log('isArray' in Array); // true 说明 isArray 的确是 Array 的属性
@@ -100,7 +100,7 @@ for (var prop in Array) {
 }
 ```
 
-根据之前讲的特性，我们很容易知道：`isArray` 属性的 [[Enumerable]] 特性是 false，所以我们没法枚举出来。我们可以做一个测试：
+根据之前讲的特性，我们很容易推测出：`isArray` 属性的 [[Enumerable]] 特性是 false，所以我们没办法枚举出来。我们可以做一个测试：
 
 ```javascript
 // 将 Array 对象的 isArray 属性的 [[Enumerable]] 特性设置为 true
@@ -113,7 +113,7 @@ for (var prop in Array) {
 }
 ```
 
-以上测试结果还说明了一个事实：我们可以配置 isArray 的特性，那意味着 isArray 的 [[Configurable]] 的值是 true。最后我们再测试一下 [[Writable]] 特性。
+以上测试结果还说明了一个事实：我们可以配置 isArray 的特性，那意味着 isArray 的 [[Configurable]] 特性的值是 true。最后我们再测试一下 [[Writable]] 特性。
 
 ```javascript
 Array.isArray = 1;
@@ -143,9 +143,9 @@ console.log(desc.value); // ƒ isArray() { [native code] }
 访问器属性不像数据属性那样包含着数据，它包含的是一对 getter、setter 函数（不过，这两个函数都不是必须的）。就像我之前所说的，数据属性存放数据、访问器属性封装数据。封装指的是数据的读写不再是那么轻而易举了，访问器属性加了限制：**在读取访问器属性时，会调用 getter 函数；在写入访问器属性时，会调用 setter 函数**。有了这个限制，我们就能在读写属性时做一点额外的工作（比如写入时对传入值进行验证，或者联动地修改其他值）。访问器属性有如下 4 个特性：
 
 - **[[Configurable]]** ： 表示属性**是否可以配置**。包括**是否能用 delete 删除该属性**、**是否可以将属性由访问器属性转换为数据属性**、**是否能修改属性的特性**。
-- [[**Enumerable**]] ：表示属性**是否可以枚举**，即是否可以通过  for in 来访问。
-- **[[Get]]** ： 在**读取**属性时调用的函数。默认为 **undefined**。
-- **[[Set]]** ： 在**写入**属性时调用的函数。默认为 **undefined**。
+- [[**Enumerable**]] ：表示属性**是否可以枚举**，即是否可以通过  for in 枚举出来。
+- **[[Get]]** ： 在**读取**属性时调用的**函数**。默认为 **undefined**。
+- **[[Set]]** ： 在**写入**属性时调用的**函数**。默认为 **undefined**。
 
 举个栗子（栗子来源于《JavaScript高级程序设计》）：
 
@@ -187,10 +187,13 @@ console.log(book.edition); // 2 联动修改其他属性
 var book = {
     edition: 1
 };
+// 使用 Object.defineProperties 方法一次定义多个属性
 Object.defineProperties(book, {
+    // 这是一个数据属性
     _year: {
         value: 2004
     },
+    // 这是一个访问器属性
     year:{
         get: function() {
             return this._year;
