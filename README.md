@@ -24,6 +24,7 @@
   - [字符串](js/js-string.md)
   - 函数
   - [作用域](js/js-scope.md)
+  - [作用域(补充)](js/js-scope-plus.md)
   - [this](js/js-this.md)
   - 闭包
   - 原型
@@ -54,7 +55,7 @@
 
 - HTTP
 
-  - [HTTP 首部](http/http-header.md)
+  - HTTP 首部
 
 - 速查表
 
